@@ -1,6 +1,6 @@
 {
   "name": "editable",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Make nodes' innerText in place editable",
   "main": "index.js",
   "scripts": {
