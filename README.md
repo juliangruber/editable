@@ -3,6 +3,8 @@
 
 Makes DOM-Nodes in place editable and emits events
 
+![preview](http://i.imgur.com/5OYHO.png)
+
 ## usage
 
 ```js
