@@ -1,36 +1,43 @@
 
 # editable
 
-Makes DOM-Nodes in place editable and emits events
+Turn DOM-Elements into streams that
+
+* emit updates through in place editing
+* update their innerText when written to
 
 ![preview](http://i.imgur.com/5OYHO.png)
+
+In place editing starts on click and ends on form submit
 
 ## usage
 
 ```js
 var editable = require('editable')
 
-var updates = editable(document.querySelector('#my-element'))
+var el = editable(document.querySelector('#my-element'))
 
-updates.on('update', function (update) {
+el.on('data', function (update) {
   console.log(update)
 })
+
+el.write('foo')
 ```
 
 ## api
 
 ### editable(el)
 
-Turn `el` into a editable element
+Turn `el` into a editable element, returns a readable writable stream.
 
-### updates#on('update', fn)
+### editable#{form,input,submit}
 
-Called on every update
+The underlying DOM elements for in place editing.
 
-### updates#startEdit()
-### updates#endEdit()
+### editable#startEdit()
+### editable#endEdit()
 
-You shouldn't need to call those
+You shouldn't need to call those.
 
 ## installation
 
