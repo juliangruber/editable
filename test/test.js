@@ -1,27 +1,26 @@
-var assert = require('assert')
+var test = require('tape')
 var editable = require('../')
 
-console.log('tests start')
+test('editable', function (t) {
+  t.plan(2)
 
-var updates = editable(document.querySelector('span'))
+  var el = document.createElement('span')
+  el.innerText = 'some text'
 
-// perform tests on first update only
-var first = true
+  var updates = editable(el)
 
-updates.on('update', function (update) {
-  console.log('update: ' + update)
-  if (!first) return
-  assert.equal(update, 'it changed')
-  console.log('all tests passed')
-  first = false
+  updates.on('update', function (update) {
+    t.equal(update, 'it changed')
+    t.end()
+  })
+
+  updates.startEdit()
+
+  var form = el.parentNode.childNodes[1]
+  var input = form.childNodes[0]
+
+  t.equal(input.value, 'some text')
+
+  input.value = 'it changed'
+  updates.endEdit()
 })
-
-updates.startEdit()
-
-var input = document.querySelector('.editable input')
-var form = document.querySelector('.editable form')
-
-assert.equal(input.value, 'some text')
-
-input.value = 'it changed'
-updates.endEdit()

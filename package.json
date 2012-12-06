@@ -2,10 +2,7 @@
   "name": "editable",
   "version": "0.0.1",
   "description": "Make nodes' innerText in place editable",
-  "main": "index.js",
-  "scripts": {
-    "test": "browserify test/test.js -o test/bundle.js && chromium-browser test/test.html"
-  },
+  "main": "index.js"
   "repository": {
     "type": "git",
     "url": "github.com/juliangruber/editable"
@@ -19,5 +16,18 @@
   "license": "MIT",
   "dependencies": {
     "h": "~0.1.0"
+  },
+  "devDependencies": {
+    "tape": "~0.1.0"
+  },
+  "testling": {
+    "files": "test/*.js",
+    "browsers": {
+      "ie": [ 8, 9 ],
+      "firefox": [ 13 ],
+      "chrome": [ 20 ],
+      "safari": [ 5.1 ],
+      "opera": [ 12 ]
+    }
   }
 }
