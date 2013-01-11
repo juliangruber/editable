@@ -12,15 +12,15 @@ test('editable', function (t) {
   var el = editable(dom)
 
   el.on('data', function (update) {
-    t.equal(update, 'it changed')
+    t.equal(update, 'it changed', 'stream received data')
   })
 
   el.startEdit()
-  t.equal(el.input.value, 'some text')
+  t.equal(el.input.value, 'some text', 'input changed')
   el.input.value = 'it changed'
   el.endEdit()
 
   el.write('and again')
-  t.equal(dom.innerText, 'and again')
+  t.equal(dom.innerText, 'and again', 'el changed')
   t.end()
 })
