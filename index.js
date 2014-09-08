@@ -13,10 +13,10 @@ function editable (el) {
   this.el = el
   this.oldDisplay = el.style.display + ''
 
-  var self;
+  var self
   el.addEventListener('click', function(){
-    self.startEdit();
-  });
+    self.startEdit()
+  })
 }
 
 inherits(editable, Stream)
