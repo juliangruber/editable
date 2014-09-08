@@ -1,6 +1,7 @@
 var Stream = require('stream')
 var h = require('h')
 var inherits = require('util').inherits
+var text = require('text-content')
 
 module.exports = editable
 
@@ -23,7 +24,7 @@ inherits(editable, Stream)
 
 // TODO: show a warning when the underlying value changed while editing
 editable.prototype.write = function (data) {
-  this.el.innerText = data
+  text(this.el, data)
 }
 
 editable.prototype.end = function () {
@@ -36,7 +37,7 @@ editable.prototype.startEdit = function () {
   
   self.el.style.display = 'none'
 
-  self.input = h('input', { type : 'text', value : self.el.innerText })
+  self.input = h('input', { type : 'text', value : text(self.el) })
   self.submit = h('input', { type : 'submit' })
 
   self.form = h('form.editable',
@@ -60,7 +61,7 @@ editable.prototype.endEdit = function () {
   this.el.parentNode.removeChild(this.form)
   this.form = this.input = this.submit = null
 
-  this.el.innerText = update
+  text(this.el.innerText, update)
   this.el.style.display = this.oldDisplay
 
   this.emit('data', update)  

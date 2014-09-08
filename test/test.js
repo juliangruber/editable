@@ -1,6 +1,7 @@
 var test = require('tape')
 var h = require('h')
 var editable = require('../')
+var text = require('text-content')
 
 test('editable', function (t) {
   t.plan(3)
@@ -21,6 +22,6 @@ test('editable', function (t) {
   el.endEdit()
 
   el.write('and again')
-  t.equal(dom.innerText, 'and again', 'el changed')
+  t.equal(text(dom), 'and again', 'el changed')
   t.end()
 })
