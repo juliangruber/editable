@@ -8,7 +8,7 @@ function editable (el) {
   if (!(this instanceof editable)) return new editable(el)
 
   Stream.call(this)
-  this.readable = this.writable = true 
+  this.readable = this.writable = true
 
   this.el = el
   this.oldDisplay = el.style.display + ''
@@ -20,7 +20,11 @@ inherits(editable, Stream)
 
 // TODO: show a warning when the underlying value changed while editing
 editable.prototype.write = function (data) {
-  this.el.innerText = data
+  if ('textContent' in this.el) {
+    this.el.textContent = data
+  } else {
+    this.el.innerText = data
+  }
 }
 
 editable.prototype.end = function () {
@@ -30,10 +34,10 @@ editable.prototype.end = function () {
 
 editable.prototype.startEdit = function () {
   var self = this
-  
+
   self.el.style.display = 'none'
 
-  self.input = h('input', { type : 'text', value : self.el.innerText })
+  self.input = h('input', { type : 'text', value : self.el.innerText || self.el.textContent })
   self.submit = h('input', { type : 'submit' })
 
   self.form = h('form.editable',
@@ -57,8 +61,9 @@ editable.prototype.endEdit = function () {
   this.el.parentNode.removeChild(this.form)
   this.form = this.input = this.submit = null
 
-  this.el.innerText = update
+  this.write(update)
+
   this.el.style.display = this.oldDisplay
 
-  this.emit('data', update)  
+  this.emit('data', update)
 }
