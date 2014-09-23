@@ -14,7 +14,7 @@ function editable (el) {
   this.el = el
   this.oldDisplay = el.style.display + ''
 
-  var self
+  var self = this;
   el.addEventListener('click', function(){
     self.startEdit()
   })
