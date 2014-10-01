@@ -1,6 +1,6 @@
 var Stream = require('stream');
 var h = require('h');
-var inherits = require('util').inherits;
+var inherits = require('inherits');
 var text = require('text-content');
 
 module.exports = Editable;
