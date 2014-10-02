@@ -8,36 +8,44 @@ Turn DOM-Elements into streams that
 
 ![preview](http://i.imgur.com/5OYHO.png)
 
-In place editing starts on click and ends on form submit
+In place editing starts on click and ends on form submit or reset
 
 ## usage
 
 ```js
-var editable = require('editable')
+var el = document.querySelector('#el');
+var ed = editable(el);
 
-var el = editable(document.querySelector('#my-element'))
+ed.on('update', function(value){
+  console.log('new value', value);
+});
 
-el.on('data', function (update) {
-  console.log(update)
-})
+// also works well with async ops,
+// in which cause it disables the
+// form until the op is done
 
-el.write('foo')
+ed.on('update', function(value, done){
+  save(value, function(err){
+    done(err);
+  });
+});
 ```
 
 ## api
 
-### editable(el)
+### var ed = editable(el)
 
-Turn `el` into a editable element, returns a readable writable stream.
+Turn `el` into a editable element.
 
-### editable#{form,input,submit}
+### ed.on('update', fn)
 
-The underlying DOM elements for in place editing.
+The event is emitted every time the user submits a new value.
 
-### editable#startEdit()
-### editable#endEdit()
+You can pass a second `Function` argument as a callback when listening, in which case `editable` waits for the callback to be called.
 
-You shouldn't need to call those.
+### ed.set(value)
+
+Manually update the value.
 
 ## installation
 
