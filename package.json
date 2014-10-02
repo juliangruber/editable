@@ -1,6 +1,6 @@
 {
   "name": "editable",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Turn DOM elements into read-write streams with in-place editing",
   "main": "index.js",
   "repository": {
