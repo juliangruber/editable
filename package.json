@@ -15,7 +15,6 @@
   "author": "Julian Gruber <julian@juliangruber.com>",
   "license": "MIT",
   "dependencies": {
-    "h": "~0.1.0",
     "hyperscript": "^1.4.0",
     "inherits": "^2.0.1",
     "text-content": "0.0.2"
