@@ -60,7 +60,7 @@ Editable.prototype._publish = function(value, cb){
   }
 
   var reject = false;
-  self.emit('update', 'value', function(err){
+  self.emit('update', value, function(err){
     if (reject) return;
     if (err) {
       reject = true;
