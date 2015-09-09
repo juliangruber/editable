@@ -47,6 +47,10 @@ You can pass a second `Function` argument as a callback when listening, in which
 
 Manually update the value.
 
+### ed.edit()
+
+Manually activate edit mode and focus the input.
+
 ## installation
 
 ```bash

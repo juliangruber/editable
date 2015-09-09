@@ -16,32 +16,7 @@ function Editable(el){
 Editable.prototype._bind = function(){
   var self = this;
   self.el.addEventListener('click', function(){
-    var input = h('input', { type: 'text', value: text(self.el) });
-    var submit = h('input', { type: 'submit' });
-    var cancel = h('input', { type: 'reset' })
-    var form = h('form.editable',
-      { onsubmit: onsubmit, onreset: onreset },
-      input,
-      submit,
-      cancel
-    );
-
-    function onsubmit(ev){
-      ev.preventDefault();
-      form.disabled = input.disabled = submit.disabled =
-      cancel.disabled = true;
-      self._publish(input.value, function(err){
-        if (!err) self.set(input.value);
-        form.parentNode.replaceChild(self.el, form);
-      });
-    }
-
-    function onreset(ev){
-      form.parentNode.replaceChild(self.el, form);
-    }
-
-    self.el.parentNode.replaceChild(form, self.el);
-    input.select();
+    self.edit();
   });
 };
 
@@ -68,5 +43,35 @@ Editable.prototype._publish = function(value, cb){
     }
     if (!--todo) cb();
   });
+};
+
+Editable.prototype.edit = function(){
+  var self = this;
+  var input = h('input', { type: 'text', value: text(self.el) });
+  var submit = h('input', { type: 'submit' });
+  var cancel = h('input', { type: 'reset' })
+  var form = h('form.editable',
+    { onsubmit: onsubmit, onreset: onreset },
+    input,
+    submit,
+    cancel
+  );
+
+  function onsubmit(ev){
+    ev.preventDefault();
+    form.disabled = input.disabled = submit.disabled =
+    cancel.disabled = true;
+    self._publish(input.value, function(err){
+      if (!err) self.set(input.value);
+      form.parentNode.replaceChild(self.el, form);
+    });
+  }
+
+  function onreset(ev){
+    form.parentNode.replaceChild(self.el, form);
+  }
+
+  self.el.parentNode.replaceChild(form, self.el);
+  input.select();
 };
 
