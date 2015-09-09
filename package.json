@@ -3,10 +3,7 @@
   "version": "1.0.2",
   "description": "Turn DOM elements into read-write streams with in-place editing",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "github.com/juliangruber/editable"
-  },
+  "repository": "juliangruber/editable",
   "keywords": [
     "editable",
     "inplace",
