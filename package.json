@@ -12,12 +12,12 @@
   "author": "Julian Gruber <julian@juliangruber.com>",
   "license": "MIT",
   "dependencies": {
-    "hyperscript": "^1.4.0",
+    "hyperscript": "^2.0.2",
     "inherits": "^2.0.1",
-    "text-content": "0.0.2"
+    "text-content": "0.0.3"
   },
   "devDependencies": {
-    "tape": "~0.1.0"
+    "tape": "~4.6.2"
   },
   "testling": {
     "files": "test/*.js",
